@@ -14,10 +14,14 @@ const subscriptionRoutes = require('./routes/subscriptions');
 
 const app = express();
 const port = process.env.PORT || 3000;
-const allowedOrigins = [
-  process.env.CLIENT_ORIGIN || 'http://127.0.0.1:4200',
-  'http://localhost:4200'
-];
+const allowedOrigins = Array.from(
+  new Set([
+    process.env.CLIENT_ORIGIN || 'http://127.0.0.1:4200',
+    'http://localhost:4200',
+    'http://127.0.0.1:4201',
+    'http://localhost:4201'
+  ])
+);
 
 app.use(cors({ origin: allowedOrigins }));
 app.use(express.json());
