@@ -64,10 +64,14 @@ async function start() {
       }
     }
   } catch (error) {
-    console.warn(`MongoDB unavailable, using local fallback data: ${error.message}`);
+    app.locals.mongoError = error?.message || String(error);
+    console.warn(`MongoDB unavailable: ${app.locals.mongoError}`);
   } finally {
     app.listen(port, () => {
       console.log(`Blush & Glow API running on http://localhost:${port}`);
+      if (!app.locals.dbConnected) {
+        console.warn(`DB not connected. /api/* will return 503. Error: ${app.locals.mongoError}`);
+      }
     });
   }
 }
