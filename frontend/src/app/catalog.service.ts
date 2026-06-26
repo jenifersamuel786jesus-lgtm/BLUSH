@@ -4,7 +4,7 @@ import { Observable, catchError, of } from 'rxjs';
 
 import { Category, categories } from './product-data';
 
-const API_URL = '/api';
+const API_URL = 'https://blush-1-31cq.onrender.com/api';
 
 @Injectable({ providedIn: 'root' })
 export class CatalogService {
