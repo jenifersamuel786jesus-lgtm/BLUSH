@@ -1,0 +1,35 @@
+@if (category(); as category) {
+  <main class="category-page">
+    <section class="category-hero">
+      <div>
+        <a class="back-link" routerLink="/">Back to Home</a>
+        <h1>{{ category.title }}</h1>
+        <p>{{ category.summary }}</p>
+      </div>
+      <img [src]="category.image" [alt]="category.title">
+    </section>
+
+    <section class="products category-products">
+      <div class="grid">
+        @for (product of category.products; track product.name) {
+          <article class="card product-card">
+            <img [src]="product.image" [alt]="product.name">
+            <h3>{{ product.name }}</h3>
+            <p>{{ product.price }}</p>
+            <button type="button" (click)="addToCart(product)">Buy Now</button>
+          </article>
+        }
+      </div>
+    </section>
+  </main>
+} @else {
+  <main class="category-page">
+    <section class="category-hero not-found">
+      <div>
+        <h1>Collection Not Found</h1>
+        <p>This collection is not available right now.</p>
+        <a class="btn" routerLink="/">Back to Home</a>
+      </div>
+    </section>
+  </main>
+}

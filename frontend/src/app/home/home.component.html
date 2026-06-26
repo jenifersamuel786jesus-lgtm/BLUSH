@@ -1,0 +1,62 @@
+<main>
+  <section class="hero" id="home">
+    <div class="hero-content">
+      <h1>A Little Blush, A Lot of Glow</h1>
+      <p>Discover beauty that feels effortless - just a little blush for a fresh look and a lot of glow for lasting confidence.</p>
+
+      <div class="buttons">
+        <a href="#products" class="btn">Shop Collection</a>
+        <a href="#about" class="btn-outline">Discover Brand</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="products" id="products">
+    <h2>Best Sellers</h2>
+
+    <div class="grid">
+      @for (category of categories(); track category.slug) {
+        <article class="card">
+          <img [src]="category.image" [alt]="category.title">
+          <h3>{{ category.title }}</h3>
+          <p>{{ category.summary }}</p>
+          <a class="card-action" [routerLink]="['/category', category.slug]">Click Here!</a>
+        </article>
+      }
+    </div>
+  </section>
+
+  <section class="about" id="about">
+    <div class="text">
+      <h2>About Blush & Glow</h2>
+      <p>
+        We believe beauty is power. Our luxury cosmetics are designed to enhance natural elegance with high-performance formulas.
+      </p>
+
+      <ul>
+        <li>High-End Ingredients</li>
+        <li>Dermatologist Approved</li>
+        <li>Long Lasting Finish</li>
+        <li>Cruelty Free Luxury</li>
+      </ul>
+    </div>
+
+    <div class="image">
+      <img src="https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?w=900" alt="Beauty model">
+    </div>
+  </section>
+
+<section class="cta">
+    <h2>Join The Glow Club</h2>
+    <p>Get exclusive offers & early access to new drops.</p>
+
+    <form (submit)="onSubscribe($event)">
+      <input name="email" type="email" placeholder="Enter your email" required>
+      <button type="submit">Subscribe</button>
+    </form>
+
+    @if (subscribeMessage()) {
+      <p class="subscribe-message">{{ subscribeMessage() }}</p>
+    }
+  </section>
+</main>

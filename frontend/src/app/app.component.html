@@ -1,0 +1,32 @@
+<header>
+  <a class="logo" routerLink="/" (click)="closeMenu()">Blush & Glow</a>
+
+  <nav id="nav" [class.active]="menuOpen">
+    <ul>
+      <li><a routerLink="/" fragment="home" routerLinkActive="active-link" (click)="closeMenu()">Home</a></li>
+      <li><a routerLink="/" fragment="products" (click)="closeMenu()">Shop</a></li>
+      <li><a routerLink="/" fragment="about" (click)="closeMenu()">Brand</a></li>
+      <li><a routerLink="/" fragment="contact" (click)="closeMenu()">Contact</a></li>
+      <li>
+        <a class="cart-link" routerLink="/cart" routerLinkActive="active-link" (click)="closeMenu()">
+          Cart
+          @if (cart.itemCount()) {
+            <span>{{ cart.itemCount() }}</span>
+          }
+        </a>
+      </li>
+    </ul>
+  </nav>
+
+  <button class="menu-toggle" type="button" aria-label="Toggle navigation" (click)="toggleMenu()">
+    &#9776;
+  </button>
+</header>
+
+<router-outlet></router-outlet>
+
+<footer id="contact">
+  <h3>Blush & Glow</h3>
+  <p>Luxury Beauty Redefined</p>
+  <p>&copy; 2026 All Rights Reserved</p>
+</footer>

@@ -1,0 +1,94 @@
+<main class="cart-page">
+  <section class="cart-hero">
+    <div>
+      <a class="back-link" routerLink="/">Continue Shopping</a>
+      <h1>Your Cart</h1>
+      <p>Review your products, enter delivery details, and place your Blush & Glow order.</p>
+    </div>
+  </section>
+
+  @if (confirmation(); as order) {
+    <section class="order-success">
+      <h2>Order Placed</h2>
+      <p>Your order <strong>{{ order.id }}</strong> has been confirmed.</p>
+      <div class="order-summary">
+        <p><strong>Name:</strong> {{ order.details.name }}</p>
+        <p><strong>Email:</strong> {{ order.details.email }}</p>
+        <p><strong>Phone:</strong> {{ order.details.phone }}</p>
+        <p><strong>Delivery Address:</strong> {{ order.details.address }}</p>
+        <p><strong>Estimated Delivery:</strong> {{ order.deliveryWindow }}</p>
+        <p><strong>Total:</strong> Rs. {{ order.total }}</p>
+      </div>
+      <a class="btn" routerLink="/">Shop More</a>
+    </section>
+  }
+
+  <section class="checkout-layout">
+    <div class="cart-panel">
+      <h2>Products</h2>
+
+      @if (cart.items().length) {
+        <div class="cart-items">
+          @for (item of cart.items(); track item.product.name) {
+            <article class="cart-item">
+              <img [src]="item.product.image" [alt]="item.product.name">
+              <div>
+                <h3>{{ item.product.name }}</h3>
+                <p>{{ item.product.price }}</p>
+                <div class="quantity-controls" aria-label="Quantity controls">
+                  <button type="button" (click)="decrease(item.product.name)">-</button>
+                  <span>{{ item.quantity }}</span>
+                  <button type="button" (click)="cart.add(item.product)">+</button>
+                </div>
+              </div>
+              <button class="remove-button" type="button" (click)="remove(item.product.name)">Remove</button>
+            </article>
+          }
+        </div>
+
+        <div class="cart-total">
+          <span>Subtotal</span>
+          <strong>Rs. {{ cart.subtotal() }}</strong>
+        </div>
+      } @else {
+        <div class="empty-cart">
+          <p>Your cart is empty.</p>
+          <a class="card-action" routerLink="/">Browse Products</a>
+        </div>
+      }
+    </div>
+
+    <form class="checkout-form" (submit)="placeOrder($event)">
+      <h2>Delivery Details</h2>
+
+      <label>
+        Name
+        <input name="name" type="text" placeholder="Your full name" required>
+      </label>
+
+      <label>
+        Address
+        <textarea name="address" rows="4" placeholder="House no, street, city, pin code" required></textarea>
+      </label>
+
+      <label>
+        Email
+        <input name="email" type="email" placeholder="you@example.com" required>
+      </label>
+
+      <label>
+        Phone Number
+        <input name="phone" type="tel" placeholder="10 digit mobile number" pattern="[0-9]{10}" required>
+      </label>
+
+      @if (orderError()) {
+        <p class="form-error">{{ orderError() }}</p>
+      }
+
+      <button type="submit" [disabled]="!hasItems() || submitting()">
+        {{ submitting() ? 'Placing Order...' : 'Place Order' }}
+      </button>
+      <p class="delivery-note">Estimated delivery is generated after the order is placed.</p>
+    </form>
+  </section>
+</main>
