@@ -4,7 +4,7 @@ import { Observable, tap } from 'rxjs';
 
 import { Product } from './product-data';
 
-const API_URL = '/api';
+const API_URL = '/_/backend/api';
 
 export interface CartItem {
   product: Product;

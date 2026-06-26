@@ -8,7 +8,7 @@ import { HttpClient } from '@angular/common/http';
 import { CatalogService } from '../catalog.service';
 import { categories } from '../product-data';
 
-const API_URL = '/api';
+const API_URL = '/_/backend/api';
 
 @Component({
   selector: 'app-home',
@@ -46,5 +46,4 @@ export class HomeComponent {
     });
   }
 }
-
 

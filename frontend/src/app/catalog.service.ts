@@ -4,7 +4,7 @@ import { Observable, catchError, of } from 'rxjs';
 
 import { Category, categories } from './product-data';
 
-const API_URL = '/api';
+const API_URL = '/_/backend/api';
 
 @Injectable({ providedIn: 'root' })
 export class CatalogService {
